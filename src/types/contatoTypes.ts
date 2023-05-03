@@ -1,4 +1,5 @@
-export interface ContatoInterface {
+export type ContatoInterface ={
+  chave: string;
   nome: string;
   email: string;
   telefone: number | undefined;
