@@ -29,7 +29,6 @@ function ContatoProvider(props: { children: React.ReactNode }) {
      
     })
   },[])
-//  console.log(contatos)
   return (
     <ContatoContext.Provider value={{contatos, gravar }}>
       {props.children}
