@@ -1,11 +1,11 @@
 export type ContatoInterface ={
-  chave: string;
+  chave?: string;
   nome: string;
   email: string;
-  telefone: number | undefined;
+  telefone: number;
   observacao: string;
 }
 export interface ContatoContextInterface extends ContatoInterface {
-  contato: ContatoInterface[];
+  contato?: ContatoInterface;
   gravar?: (contatoData: [ContatoInterface]) => void;
 }

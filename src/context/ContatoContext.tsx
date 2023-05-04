@@ -8,7 +8,7 @@ function ContatoProvider(props: { children: React.ReactNode }) {
   const [contato, setContato] = useState<ContatoContextInterface[]>([]);
   const [contatos, setContatos] = useState<ContatoInterface[]>();
 
-  const gravar = async(contatoData: [ContatoInterface]) => {
+  const gravar = async(contatoData: ContatoInterface) => {
     const ref = await database.ref("contatos");
     ref.push(contatoData);
     setContato([]);

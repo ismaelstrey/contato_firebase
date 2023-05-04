@@ -1,30 +1,33 @@
 "use client";
 import React, { FormEvent, ReactElement, useContext, useState } from "react";
 import { ContatoContext } from "@/context/ContatoContext";
-import { ContatoContextInterface } from "@/types/contatoTypes";
+import {
+  ContatoContextInterface,ContatoInterface
+} from "@/types/contatoTypes";
 
 const Formulario: React.FC = (): ReactElement => {
   const { gravar } = useContext(
     ContatoContext
-  ) as unknown as ContatoContextInterface;
+  ) as ContatoContextInterface;
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
-  const [telefone, setTelefone] = useState(undefined);
-  const [observacoes, setObservacoes] = useState("");
+  const [telefone, setTelefone] = useState<number>(Number());
+  const [observacao, setObservacao] = useState("");
 
   const gravarData = (event: FormEvent) => {
     event.preventDefault();
-    const dados = {
+    const contato = {
       nome,
       email,
       telefone,
-      observacoes,
+      observacao,
     };
-    gravar(dados);
-    setNome("");
-    setEmail("");
-    setTelefone(undefined);
-    setObservacoes("");
+    // @ts-ignore
+    gravar(contato)
+    setNome(" ");
+    setEmail(" ");
+    setTelefone(0);
+    setObservacao(" ");
   };
   return (
     <div className="flex shadow shadow-slate-500 m-4 p-4 bg-green-300">
@@ -51,16 +54,16 @@ const Formulario: React.FC = (): ReactElement => {
           name="telefone"
           placeholder="Telefone"
           className="border border-slate-700 rounded-sm h-7 p-2"
-          onChange={(e) => setTelefone(e.target.value)}
+          onChange={(e) => setTelefone(Number(e.target.value))}
         />
         <textarea
           name="Observação"
-          value={observacoes}
+          value={observacao}
           id="Observacao"
           cols={30}
           rows={7}
           className="border border-slate-700 rounded-sm p-2"
-          onChange={(e) => setObservacoes(e.target.value)}
+          onChange={(e) => setObservacao(e.target.value)}
         ></textarea>
         <button
           type="submit"

@@ -3,7 +3,7 @@ import Card from "./card";
 import { ContatoInterface } from "@/types/contatoTypes";
 import { ContatoContext } from "@/context/ContatoContext";
 
-const Contatos: React.FC<ContatoInterface[]> = () => {
+const Contatos: React.FC = () => {
   const { contatos } = useContext(ContatoContext);
 
   const RendeCard: React.FC = () =>
@@ -14,7 +14,7 @@ const Contatos: React.FC<ContatoInterface[]> = () => {
         nome={contato.nome}
         email={contato.email}
         telefone={contato.telefone}
-        observacao={contatos.observacao}
+        observacao={contato.observacao}
       />
     ));
 
