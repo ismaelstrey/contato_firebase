@@ -2,7 +2,7 @@
 import React, { FormEvent, ReactElement, useContext, useState } from "react";
 import { ContatoContext } from "@/context/ContatoContext";
 import {
-  ContatoContextInterface,ContatoInterface
+  ContatoContextInterface
 } from "@/types/contatoTypes";
 
 const Formulario: React.FC = (): ReactElement => {
