@@ -4,7 +4,7 @@ import { ContatoInterface } from "@/types/contatoTypes";
 import { ContatoContext } from "@/context/ContatoContext";
 
 const Contatos: React.FC = () => {
-  const { contatos } = useContext(ContatoContext);
+  const { contatos, deletar,editar, contato,atualizar } = useContext(ContatoContext);
   const [busca,setBusca] = useState<ContatoInterface[]>()
 
   function RendeCard(array: ContatoInterface[]) {
@@ -15,7 +15,11 @@ const Contatos: React.FC = () => {
         nome={contato.nome}
         email={contato.email}
         telefone={contato.telefone}
-        observacao={contato.observacao} />
+        observacao={contato.observacao} 
+        deletar={deletar}
+        editar={editar}
+        atualizar={atualizar}
+        />
     ));
   }
 

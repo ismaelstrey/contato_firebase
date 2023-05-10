@@ -1,6 +1,6 @@
 "use client";
 import Contatos from "@/components/contatos/contatos";
-import Formulario from "@/components/formulario";
+import Formulario from "@/components/formulario/formulario";
 import ContatoProvider from "@/context/ContatoContext";
 
 export default function Home() {

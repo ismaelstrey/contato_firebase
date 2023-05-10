@@ -1,37 +1,49 @@
 "use client";
-import React, { FormEvent, ReactElement, useContext, useState } from "react";
+import React, { FormEvent, ReactElement, useContext, useEffect, useState } from "react";
 import { ContatoContext } from "@/context/ContatoContext";
 import {
   ContatoContextInterface
 } from "@/types/contatoTypes";
 
 const Formulario: React.FC = (): ReactElement => {
-  const { gravar } = useContext(
+  const { gravar, contato,atualizar } = useContext(
     ContatoContext
   ) as ContatoContextInterface;
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState<number>(Number());
   const [observacao, setObservacao] = useState("");
+  const [chave, setChave] = useState("");
 
-  const gravarData = (event: FormEvent) => {
-    event.preventDefault();
-    const contato = {
+  useEffect(()=>{
+    contato?.nome && setNome(contato.nome)
+    contato?.email && setEmail(contato.email)
+    contato?.telefone && setTelefone(contato.telefone)
+    contato?.observacao && setObservacao(contato.observacao)
+    contato?.chave && setChave(contato.chave)
+  },[contato])
+  const contatct = {
+      chave,
       nome,
       email,
       telefone,
       observacao,
     };
+  const gravarData = (event: FormEvent) => {
+    event.preventDefault();
+  
     // @ts-ignore
-    gravar(contato)
+    gravar(contatct)
     setNome(" ");
     setEmail(" ");
     setTelefone(0);
     setObservacao(" ");
   };
+
+
   return (
     <div className="flex shadow shadow-slate-500 m-4 p-4 bg-green-300">
-      <form className="flex flex-col gap-2" onSubmit={gravarData}>
+      <div className="flex flex-col gap-2">
         <input
           type="text"
           value={nome}
@@ -65,13 +77,21 @@ const Formulario: React.FC = (): ReactElement => {
           className="border border-slate-700 rounded-sm p-2"
           onChange={(e) => setObservacao(e.target.value)}
         ></textarea>
-        <button
-          type="submit"
-          className="bg-blue-500 rounded-sm h-7 text-white text-md"
-        >
-          Salvar
-        </button>
-      </form>
+    {
+      contato ?     <button
+      className="bg-blue-500 rounded-sm h-7 text-white text-md"
+      onClick={(e)=> gravarData(e)}
+    >
+      Atualizar
+    </button> :
+    <button
+    className="bg-green-500 rounded-sm h-7 text-white text-md"
+      onClick={()=> atualizar(contatct)}
+    >
+      Salvar
+    </button>
+    }
+      </div>
     </div>
   );
 };
